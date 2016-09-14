@@ -1,66 +1,62 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {!! csrf_field() !!}
+<head>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    <title>H+ 后台主题UI框架 - 登录</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="{{ asset('backend/css/bootstrap.min.css?v=3.3.5') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/font-awesome.min.css?v=4.4.0') }}" rel="stylesheet">
 
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
+    <link href="{{ asset('backend/css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/style.min.css?v=4.0.0') }}" rel="stylesheet"><base target="_blank">
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+<body class="gray-bg">
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
+            <h1 class="logo-name">H+</h1>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
+        <h3>欢迎使用 H+</h3>
+        <ul class="list-group">   {{-- 这个代码是额外的，主要是为了看验证失败的时候的报错信息，laravel会将错误信息写到$errors里面去，所以能够在页面获取来看 --}}
+            @foreach($errors->all() as $error)
+                <li class="list-group-item list-group-item-danger">{{$error}}</li>
+            @endforeach
+        </ul>
+        <form class="m-t" role="form" method="post" action="{{ url('/login') }}">
+            <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="用户名" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="密码" required="">
+            </div>
+            {!! csrf_field() !!}
+            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+
+            <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+            </p>
+
+        </form>
     </div>
 </div>
-@endsection
+<script src="{{ asset('backend/js/jquery.min.js?v=2.1.4') }}"></script>
+<script src="{{ asset('backend/js/bootstrap.min.js?v=3.3.5') }}"></script>
+</body>
+
+</html>

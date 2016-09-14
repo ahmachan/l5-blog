@@ -25,9 +25,15 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-Route::get('login', 'Backend\LoginController@login');
-Route::group(['middleware' => ['web']], function () {
-    //
+//Route::get('login', 'Backend\LoginController@login');
+//Route::group(['middleware' => ['web']], function () {
+//    //
+//
+//});
 
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
 });
-

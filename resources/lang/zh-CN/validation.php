@@ -81,6 +81,7 @@ return [
     'timezone'             => ':attribute 必须是一个合法的时区值。',
     'unique'               => ':attribute 已经存在。',
     'url'                  => ':attribute 格式不正确。',
+    'captcha'              => ':attribute 填写不正确。',
 
     /*
     |--------------------------------------------------------------------------
@@ -140,6 +141,7 @@ return [
         'time'                  => '时间',
         'available'             => '可用的',
         'size'                  => '大小',
+        'captcha'               => '验证码',
     ],
 
 ];

@@ -155,6 +155,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //验证码服务
+        Mews\Captcha\CaptchaServiceProvider::class,
 
     ],
 
@@ -201,7 +203,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //验证码门面
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

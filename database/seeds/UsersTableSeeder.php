@@ -12,19 +12,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //管理员账号
-        $admin = factory('App\Model\User')->create([
+        $admin = factory('App\Models\User')->create([
             "name"      => 'admin',
             "email"     => "admin@gmail.com",
             "password"  => bcrypt("123456")
         ]);
         //来宾账号
-        $guest = factory('App\Model\User')->create([
+        $guest = factory('App\Models\User')->create([
             "name"      => 'guest',
             "email"     => "guest@gmail.com",
             "password"  => bcrypt("123456")
         ]);
         //其他随机账号
-        factory('App\Model\User', 5)->create([
+        factory('App\Models\User', 5)->create([
             "password"  => bcrypt("123456")
         ]);
     }

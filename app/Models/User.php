@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Model
 {
+    use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *

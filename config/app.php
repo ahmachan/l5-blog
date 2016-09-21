@@ -160,6 +160,8 @@ return [
         //权限服务
         Zizaco\Entrust\EntrustServiceProvider::class,
 
+        App\Providers\RepoUserServiceProvider::class,
+
     ],
 
     /*

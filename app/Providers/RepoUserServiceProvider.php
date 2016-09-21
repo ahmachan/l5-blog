@@ -29,5 +29,8 @@ class RepoUserServiceProvider extends ServiceProvider
         });
         // 绑定
 //        $this->app->bind('App\Repositories\Contracts\UserInterface', 'App\Repositories\Eloquent\UserServiceRepository');
+        $this->app->singleton('App\Repositories\Contracts\UserInterface', function($app){
+            return new \App\Repositories\Eloquent\UserFacadeRepository();
+        });
     }
 }

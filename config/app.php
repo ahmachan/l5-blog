@@ -211,6 +211,8 @@ return [
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         //权限门面
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
+        'UserFacadeRepo' => App\Facades\UserFacade::class,
     ],
 
 ];

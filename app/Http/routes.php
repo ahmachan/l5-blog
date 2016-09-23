@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'demo'], function(){
     Route::get('/', 'Backend\DemoController@index');
     Route::get('facades', 'Backend\DemoController@facades');
+    Route::get('getBy', 'Backend\DemoController@getBy');
 });
 
 

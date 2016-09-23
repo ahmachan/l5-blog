@@ -29,10 +29,10 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::where('name','=','admin')->first();
-        var_dump($user->hasRole("admin"));
-        var_dump($user->can('create_users'));
+//        var_dump($user->hasRole("admin"));
+//        var_dump($user->can('create_users'));
         // 判断用户角色
-         dd(Entrust::hasRole('admin'));
+//         dd(Entrust::hasRole('admin'));
         return view('home');
     }
 }

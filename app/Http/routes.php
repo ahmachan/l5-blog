@@ -22,6 +22,7 @@ Route::group(['prefix' => 'demo'], function(){
 });
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -41,6 +42,8 @@ Route::group(['prefix' => 'demo'], function(){
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
-    Route::get('/home', 'HomeController@index');
+    Route::group(['prefix' => 'admin'], function(){
+        Route::get('/', 'Backend\HomeController@index');
+    });
+//    Route::get('/home', 'HomeController@index');
 });

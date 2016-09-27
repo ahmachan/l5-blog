@@ -44,6 +44,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::group(['prefix' => 'admin'], function(){
         Route::get('/', 'Backend\HomeController@index');
+        Route::resource('menu', 'Backend\MenuController');
     });
 //    Route::get('/home', 'HomeController@index');
 });

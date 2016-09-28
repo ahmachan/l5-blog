@@ -39,7 +39,7 @@ class MenuRepository extends MenuImpRepository
         if ($menus) {
             $menuList = $this->sortMenu($menus);
             // 缓存菜单数据
-            Cache::forever(config('admin.globals.cache.menuList'),$menuList);
+            Cache::forever(config('back.globals.cache.menuList'),$menuList);
             return $menuList;
 
         }
@@ -49,7 +49,7 @@ class MenuRepository extends MenuImpRepository
     public function getMenuList() {
         // 判断数据是否缓存
         if (Cache::has(config('admin.globals.cache.menuList'))) {
-            return Cache::get(config('admin.globals.cache.menuList'));
+            return Cache::get(config('back.globals.cache.menuList'));
         }
         return $this->sortMenuSetCache();
     }

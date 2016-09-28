@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
 
 
         $adminRole = Role::where('name','admin')->first();
-        $userRole = Role::where('name','owner')->first();
+        $userRole = Role::where('name','user')->first();
         //超级管理员
         $admin = factory(App\Models\User::class)->create([
             'name' => 'admin',

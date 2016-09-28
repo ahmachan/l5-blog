@@ -20,15 +20,17 @@ class RoleTableSeeder extends Seeder
         $admin->save();
 
         $owner = new Role();
-        $owner->name = 'owner';
-        $owner->display_name = '项目所有者';
-        $owner->description = '项目所有者';
+        $owner->name = 'user';
+        $owner->display_name = '普通管理';
+        $owner->description = '普通管理';
         $owner->save();
 
         $allPermission = array_column(Permission::all()->toArray(), 'id');
         $admin->perms()->sync($allPermission);
+        // 普通管理
         $user = Permission::where("display_name", "=", "创建用户")->first();
-        $owner->attachPermission($user);
+        $loginBackend = Permission::where('name','admin.system.login')->first();
+        $owner->attachPermissions([$user, $loginBackend]);
 
     }
 }

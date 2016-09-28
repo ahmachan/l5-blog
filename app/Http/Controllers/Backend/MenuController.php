@@ -24,7 +24,10 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view("backend.menu.index");
+        $menu = $this->menu->findByField("parent_id", 0);
+        $menuList = $this->menu->getMenuList();
+//        dd($menuList);
+        return view("backend.menu.index")->with(compact('menu','menuList'));
     }
 
     /**
@@ -45,9 +48,10 @@ class MenuController extends Controller
      */
     public function store(Requests\MenuRequest $request)
     {
-        dd($request);
+//        dd($request);
         $result = $this->menu->create($request->all());
-        return redirect('index');
+
+        return redirect('/admin/menu');
 //        if($request) {
 //
 //        }

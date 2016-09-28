@@ -42,7 +42,7 @@ Route::group(['prefix' => 'demo'], function(){
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::group(['prefix' => 'admin'], function(){
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         Route::get('/', 'Backend\HomeController@index');
         Route::resource('menu', 'Backend\MenuController');
     });

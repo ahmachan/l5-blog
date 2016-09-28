@@ -81,6 +81,7 @@ abstract class MenuImpRepository implements MenuInterface
     public function orderBy($column, $direction = 'asc')
     {
         // TODO: Implement orderBy() method.
+        return $this->model->orderBy('sort', $direction)->get()->toArray();
     }
 
     public function with($relations)

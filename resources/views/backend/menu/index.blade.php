@@ -25,57 +25,9 @@
 
                         <div class="dd" id="nestable2">
                             <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">
-                                        <span class="label label-info"></span> 群组
-                                    </div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
-                                                <span class="pull-right"> 12:00 </span>
-                                                <span class="label label-info"></span> 设置
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="3">
-                                            <div class="dd-handle">
-                                                <span class="pull-right"> 11:00 </span>
-                                                <span class="label label-info"></span> 筛选
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="4">
-                                            <div class="dd-handle">
-                                                <span class="pull-right"> 11:00 </span>
-                                                <span class="label label-info"></span> 电脑
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </li>
+                                @inject('menus', 'App\Repositories\Presenter\MenuPresenter')
+                                {!! $menus->getMenuList($menuList) !!}
 
-                                <li class="dd-item" data-id="5">
-                                    <div class="dd-handle">
-                                        <span class="label label-warning"></span> 用户
-                                    </div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="6">
-                                            <div class="dd-handle">
-                                                <span class="pull-right"> 15:00 </span>
-                                                <span class="label label-warning"></span> 列用户表
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="7">
-                                            <div class="dd-handle">
-                                                <span class="pull-right"> 16:00 </span>
-                                                <span class="label label-warning"></span> 炸弹
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="8">
-                                            <div class="dd-handle">
-                                                <span class="pull-right"> 21:00 </span>
-                                                <span class="label label-warning"></span> 子元素
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </li>
                             </ol>
                         </div>
                         <div class="m-t-md">
@@ -105,15 +57,14 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label>菜单名称</label>
-                                        <input type="name" placeholder="" class="form-control">
+                                        <input type="text" name="name" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>父级菜单</label>
                                         <select class="form-control m-b" name="parent_id">
-                                            <option value="1">一级菜单</option>
-                                            <option value="2">&nbsp;&nbsp;&nbsp;&nbsp;二级菜单</option>
-                                            <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三级菜单</option>
-                                            <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;二级菜单2</option>
+                                            @inject('menus', 'App\Repositories\Presenter\MenuPresenter')
+                                            {{!! $menus->getMenu($menu); !!}}
+
                                         </select>
                                     </div>
                                     <div class="form-group">

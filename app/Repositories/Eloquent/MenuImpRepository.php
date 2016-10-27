@@ -66,6 +66,7 @@ abstract class MenuImpRepository implements MenuInterface
     public function update(array $attributes, $id)
     {
         // TODO: Implement update() method.
+        return $this->model->where('id', $id)->update($attributes);
     }
 
     public function updateOrCreate(array $attributes, array $values = [])
@@ -81,11 +82,17 @@ abstract class MenuImpRepository implements MenuInterface
     public function orderBy($column, $direction = 'asc')
     {
         // TODO: Implement orderBy() method.
-        return $this->model->orderBy('sort', $direction)->get()->toArray();
+        return $this->model->orderBy($column, $direction)->get()->toArray();
     }
 
     public function with($relations)
     {
         // TODO: Implement with() method.
+    }
+
+    public function insertGetId($data)
+    {
+        // TODO: Implement insertGetId() method.
+        return $this->model->insertGetId($data);
     }
 }

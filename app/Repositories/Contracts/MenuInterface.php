@@ -110,4 +110,6 @@ interface MenuInterface
      * @return $this
      */
     public function with($relations);
+
+    public function insertGetId($data);
 }

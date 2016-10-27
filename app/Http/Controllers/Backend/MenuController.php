@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquent\MenuRepository;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -24,9 +25,12 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = $this->menu->findByField("parent_id", 0);
+        $menu = $this->getMenus();
         $menuList = $this->menu->getMenuList();
 //        dd($menuList);
+//        echo '<pre>';
+//        var_dump($menuList);
+//        echo '</pre>';
         return view("backend.menu.index")->with(compact('menu','menuList'));
     }
 
@@ -48,13 +52,17 @@ class MenuController extends Controller
      */
     public function store(Requests\MenuRequest $request)
     {
-//        dd($request);
-        $result = $this->menu->create($request->all());
+        $parent_id = $request->input("parent_id");
+        $result = DB::table("menus")->where("id","=",$parent_id)->first();
+        $data = $request->all();
+        unset($data['_token']);
+        $insertId = $this->menu->insertGetId($data);
+        if($insertId) {
+            $update = ['path' => $result->path . ',' . $insertId];
+            $this->menu->update($update, $insertId);
+        }
 
         return redirect('/admin/menu');
-//        if($request) {
-//
-//        }
     }
 
     /**
@@ -100,5 +108,9 @@ class MenuController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function getMenus() {
+        return DB::table("menus")->select("id","name","path")->orderBy("path")->get();
     }
 }

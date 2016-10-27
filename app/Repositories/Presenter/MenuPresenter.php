@@ -3,12 +3,20 @@ namespace App\Repositories\Presenter;
 
 class MenuPresenter
 {
+    protected $menuStr;
     public function getMenu($menus)
     {
         if ($menus) {
             $option = '<option value="0">顶级菜单</option>';
             foreach ($menus as $v) {
-                $option .= '<option value="'.$v->id.'">'.$v->name.'</option>';
+                $space = '';
+                $tmp = explode(',', $v->path);
+                $len = count($tmp);
+                if($len > 2) {
+                    $repeat = "├─────";
+                    $space .= str_repeat($repeat, $len - 2);
+                }
+                $option .= '<option value="'.$v->id.'">'.$space . $v->name.'</option>';
             }
             return $option;
         }
@@ -33,6 +41,28 @@ class MenuPresenter
         }
         return '暂无菜单';
     }
+
+    public function getMenusList($menus, $deep = 0) {
+        foreach ($menus as $key => $value) {
+            $len = count($value['child']);
+            $this->menuStr .= $this->nodeMenu($value, $deep);
+            if($len) {
+                $deep_copy = $deep;
+                $this->getMenusList($value['child'], ++$deep_copy);
+            }
+        }
+        return $this->menuStr;
+    }
+
+    protected function nodeMenu($menu, $deep, $treeNode=8) {
+        $node = $deep ? "├─" . str_repeat("─", $treeNode) : '';
+        if($deep) {
+            $node = str_repeat($node, $deep);
+        }
+        $node .= $menu['name'];
+        $str = "<tr><td>{$menu['id']}</td><td>$node</td><td>{$menu['sort']}</td><td><a href='javascript:;' class='menu-add'>新增</a>|<a href='javascript:;' class='menu-edit'>编辑</a>|<a href='javascript:;' class='menu-delete'>删除</a></td></tr>";
+        return $str;
+    }
     /**
      * 返回菜单HTML代码
      * @author 晚黎
@@ -48,9 +78,13 @@ class MenuPresenter
             return $this->getHandleList($menu['id'],$menu['name'],$menu['child']);
         }
         if ($menu['parent_id'] == 0) {
-            return '<li class="dd-item" data-id="'.$menu['id'].'"><div class="dd-handle"><span class="label label-info"></span> '.$menu['name'].'</div></li>';
+            $str = "<tr><td>{$menu['id']}</td><td>{$menu['name']}</td><td>1</td></tr>";
+            return $str;
+//            return '<li class="dd-item dd-parent" data-id="'.$menu['id'].'"><div class="dd-handle"><span class="label label-info"></button></span> '.$menu['name'].'</div></li>';
         }
-        return '<li class="dd-item" data-id="'.$menu['id'].'"><div class="dd-handle"><span class="label label-info"></span> '.$menu['name'].'</div></li>';
+        $str = "<tr><td>{$menu['id']}</td><td>--{$menu['name']}</td><td>1</td></tr>";
+        return $str;
+//        return '<li class="dd-item" data-id="'.$menu['id'].'"><div class="dd-handle"><span class="label label-info"></span> '.$menu['name'].'</div></li>';
     }
     /**
      * 判断是否有子集
@@ -63,13 +97,14 @@ class MenuPresenter
      */
     protected function getHandleList($id,$name,$child)
     {
-        $handle = '<li class="dd-item" data-id="'.$id.'"><div class="dd-handle"><span class="label label-info"></span>'.$name.' </div><ol class="dd-list">';
+        $handle = "<tr><td>{$id}</td><td>------{$name}</td><td>1</td></tr>";
+//        $handle = '<li class="dd-item" data-id="'.$id.'"><div class="dd-handle"><span class="label label-info"></span>'.$name.' </div><ol class="dd-list">';
         if ($child) {
             foreach ($child as $v) {
                 $handle .= $this->getNestableItem($v);
             }
         }
-        $handle .= '</ol></li>';
+//        $handle .= '</ol></li>';
         return $handle;
     }
     /**

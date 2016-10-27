@@ -20,7 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('slug')->default('')->comment('菜单权限');
             $table->string('url')->default('')->comment('菜单链接');
             $table->string('heightlight_url')->default('')->comment('菜单高亮');
-            $table->tinyInteger('sort')->unsigned()->default(0)->comment('排序');
+            $table->tinyInteger('sort')->unsigned()->default(0)->comment('排序')->index();
             $table->timestamps();
         });
     }

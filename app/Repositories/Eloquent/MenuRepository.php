@@ -35,7 +35,7 @@ class MenuRepository extends MenuImpRepository
     }
 
     public function sortMenuSetCache() {
-        $menus = parent::orderBy('sort','desc');
+        $menus = parent::orderBy('path','asc');
         if ($menus) {
             $menuList = $this->sortMenu($menus);
             // 缓存菜单数据
